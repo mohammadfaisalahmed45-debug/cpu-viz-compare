@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AlgorithmsRouteImport } from './routes/algorithms'
+import { Route as CompareRouteImport } from './routes/compare'
+import { Route as VisualizerRouteImport } from './routes/visualizer'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlgorithmsRoute = AlgorithmsRouteImport.update({
+  id: '/algorithms',
+  path: '/algorithms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompareRoute = CompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VisualizerRoute = VisualizerRouteImport.update({
+  id: '/visualizer',
+  path: '/visualizer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/algorithms': typeof AlgorithmsRoute
+  '/compare': typeof CompareRoute
+  '/visualizer': typeof VisualizerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/algorithms': typeof AlgorithmsRoute
+  '/compare': typeof CompareRoute
+  '/visualizer': typeof VisualizerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/algorithms': typeof AlgorithmsRoute
+  '/compare': typeof CompareRoute
+  '/visualizer': typeof VisualizerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/about' | '/algorithms' | '/compare' | '/visualizer'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/about' | '/algorithms' | '/compare' | '/visualizer'
+  id: '__root__' | '/' | '/about' | '/algorithms' | '/compare' | '/visualizer'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AlgorithmsRoute: typeof AlgorithmsRoute
+  CompareRoute: typeof CompareRoute
+  VisualizerRoute: typeof VisualizerRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/algorithms': {
+      id: '/algorithms'
+      path: '/algorithms'
+      fullPath: '/algorithms'
+      preLoaderRoute: typeof AlgorithmsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compare': {
+      id: '/compare'
+      path: '/compare'
+      fullPath: '/compare'
+      preLoaderRoute: typeof CompareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/visualizer': {
+      id: '/visualizer'
+      path: '/visualizer'
+      fullPath: '/visualizer'
+      preLoaderRoute: typeof VisualizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AlgorithmsRoute: AlgorithmsRoute,
+  CompareRoute: CompareRoute,
+  VisualizerRoute: VisualizerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -42,12 +42,13 @@ export function GanttChart({ gantt, processIds, title, compact = false }: Props)
             {gantt.map((seg, i) => (
               <span
                 key={`t-${i}`}
-                className="absolute -translate-x-1/2"
+                className={i === gantt.length - 1 ? "absolute -translate-x-full" : "absolute -translate-x-1/2"}
                 style={{ left: `${((seg.end - start) / total) * 100}%` }}
               >
                 {seg.end}
               </span>
             ))}
+
           </div>
         </div>
       </div>
